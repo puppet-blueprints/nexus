@@ -48,13 +48,14 @@ class role_nexus_server {
   }
 
   class { '::nexus':
-    version        => '2.6.2',
+    version        => '2.8.0',
+    revision       => '05',
     nexus_user     => 'nexus',
     nexus_group    => 'nexus',
-    nexus_root     => '/srv', # All directories and files will be relative to this
+    nexus_root     => '/srv',
   }
 
-  Class['::java'] -> Group[nexus] -> User[nexus] -> Class['::nexus']
+  Class['::java'] -> Group[$nexus::nexus_group] -> User[$nexus::nexus_user] -> Class['::nexus']
 }
 
 node default {
