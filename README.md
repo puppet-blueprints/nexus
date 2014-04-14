@@ -95,7 +95,7 @@ TODO: MANIFEST file.
 
 Author:: Chris Fordham (<chris [at] fordham [hyphon] nagy [dot] id [dot] au>)
 
-Copyright 2013, Chris Fordham
+Copyright 2014, Chris Fordham
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
