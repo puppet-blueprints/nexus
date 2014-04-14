@@ -1,6 +1,6 @@
 import "nginx_proxy"
 
-group { 'puppet': ensure  => present }
+group { 'puppet': ensure => present }
 
 ## if is_vagrant is defined, then we're running under Vagrant
 if $::is_vagrant {
@@ -53,6 +53,8 @@ class role_nexus_server {
     nexus_group    => 'nexus',
     nexus_root     => '/srv', # All directories and files will be relative to this
   }
+
+  Class['::java'] -> Group[nexus] -> User[nexus] -> Class['::nexus']
 }
 
 node default {
