@@ -1,0 +1,16 @@
+---
+:backends:
+ - yaml
+ - json
+:logger: console
+:classes:
+ - sudo
+:hierarchy:
+ - local
+ - "node/%{::fqdn}"
+ - "%{::data_center}"
+ - common
+:yaml:
+  :datadir: /etc/puppet/hiera
+:json:
+  :datadir: /etc/puppet/hiera

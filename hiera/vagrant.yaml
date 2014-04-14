@@ -1,0 +1,7 @@
+---
+  classes:
+    - sudo
+  sudo::rules:
+    'vagrant':
+      priority: 10
+      content: "%vagrant ALL=(ALL) NOPASSWD: ALL"
