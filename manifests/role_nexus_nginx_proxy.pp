@@ -1,4 +1,4 @@
-class nginx_proxy {
+class role_nexus_nginx_proxy {
   class { '::nginx': }
   
   file { '/etc/nginx/conf.d/default.conf':

@@ -1,4 +1,5 @@
-import "nginx_proxy"
+import "role_nexus_server"
+import "role_nexus_nginx_proxy"
 
 group { 'puppet': ensure => present }
 
@@ -27,38 +28,7 @@ class { 'apt_get_update':
 hiera_include('classes')
 create_resources(sudo::conf, hiera('sudo::rules'))
 
-class role_nexus_server {
-  # puppetlabs-java
-  # NOTE: Nexus requires Java JRE
-  class { '::java': }
-
-  group { 'nexus':
-    ensure => present,
-    system => true
-  }
-
-  user { 'nexus':
-    ensure => present,
-    comment => 'Nexus user',
-    gid     => 'nexus',
-    home    => '/srv/nexus',
-    shell   => '/bin/bash', # unfortunately required to start application via script.
-    system  => true,
-    require => Group['nexus']
-  }
-
-  class { '::nexus':
-    version        => '2.8.0',
-    revision       => '05',
-    nexus_user     => 'nexus',
-    nexus_group    => 'nexus',
-    nexus_root     => '/srv',
-  }
-
-  Class['::java'] -> Group[$nexus::nexus_group] -> User[$nexus::nexus_user] -> Class['::nexus']
-}
-
 node default {
   include role_nexus_server
-  #include nginx_proxy
+  #include role_nexus_nginx_proxy
 }
