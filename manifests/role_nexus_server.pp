@@ -1,6 +1,7 @@
 class role_nexus_server {
+
   # puppetlabs-java
-  # NOTE: Nexus requires Java JRE
+  # NOTE: Nexus requires
   class { '::java': }
 
   group { 'nexus':
@@ -9,7 +10,7 @@ class role_nexus_server {
   }
 
   user { 'nexus':
-    ensure => present,
+    ensure  => present,
     comment => 'Nexus user',
     gid     => 'nexus',
     home    => '/srv/nexus',
@@ -20,11 +21,9 @@ class role_nexus_server {
 
   class { '::nexus':
     version        => '2.8.0',
-    revision       => '05',
-    nexus_user     => 'nexus',
-    nexus_group    => 'nexus',
-    nexus_root     => '/srv',
+    revision       => '05'
   }
 
-  Class['::java'] -> Group[$nexus::nexus_group] -> User[$nexus::nexus_user] -> Class['::nexus']
+  Class['::java'] -> Group[nexus] -> User[nexus] -> Class['::nexus']
+
 }
